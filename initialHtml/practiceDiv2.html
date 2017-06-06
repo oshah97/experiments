@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <style>
+      .container {
+      float: left;
+      width: 480px;
+      max-height: 140px;
+      border: 1px solid green;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      font-size: 0; /*remove white space*/
+      }
+      .tile {
+      width: 200px;
+      height: 90px;
+      margin: 10px 5px;
+      background: cornflowerblue;
+      display: inline-block;
+      font-size: 16px; /*reset font size*/
+      }
+      .tile:first-child {
+      margin-left: 10px; /*match space*/
+      }
+      .tile:last-child {
+      margin-right: 10px; /*match space*/
+      }
+      .floatTest {
+      margin: 60px;
+      border: 1px solid black;
+      float: left;
+      width: 200px;
+      height: 90px;
+      margin: 10px 5px;
+      background: cornflowerblue;
+      }
+    </style>
+    
+  </head>
+
+  <body>
+    <h1>Test!</h1>
+    <div class="container">
+      <div class="tile"></div>
+      <div class="tile"></div>
+      <div class="tile"></div>
+    </div>
+    <div class="floatTest">
+    </div>
+    <h2>It Works!</h2>
+    <div class="tableTest">
+      
+    </div>
+    
+
+  </body>
+</html>
