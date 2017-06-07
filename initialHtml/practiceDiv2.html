@@ -49,7 +49,8 @@
 	 display:inline-block;
          max-width: 100%;
 	 height: 100%;
-	 resize:horizontal;
+	 /*resize:horizontal;*/
+	 box-sizing: border-box;
          overflow: auto;
          }
       .smallTable {
@@ -71,7 +72,7 @@
     <div class="floatText">
       <textarea id="note" readonly="true";>
       It Works: adding scroll bar into single div
-      In the works: resizing div with table inside containing horizontal scroll
+      In the works: getting the right-side div to resize without reshaping the table
       resizing widget added, seems to work only on certain width percentages
       </textarea>
         </div>
