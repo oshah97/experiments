@@ -1,73 +1,80 @@
 <html>
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    <script>
+      $(document).ready(function(){
+        window.onresize = function(event) {
+          console.log("Window Has Been Resized");
+          };
+        });
+    </script>
     
     <style>
       table, td {
-      margin: 10px;
-      border: 1px solid black;
-      }
+         margin: 10px;
+         border: 1px solid black;
+         }
       td {
-      font-size: 100;
-      padding: 100px;
-      }
+         font-size: 100;
+         padding: 100px;
+         }
       .container {
-      float: left;
-      width: 480px;
-      max-height: 140px;
-      border: 1px solid green;
-      overflow-x: auto;
-      overflow-y: hidden;
-      white-space: nowrap;
-      font-size: 0; /*remove white space*/
-      }
-      .tile {
-      width: 200px;
-      height: 90px;
-      margin: 10px 5px;
-      background: cornflowerblue;
-      display: inline-block;
-      font-size: 16px; /*reset font size*/
-      }
-      .tile:first-child {
-      margin-left: 10px; /*match space*/
-      }
-      .tile:last-child {
-      margin-right: 10px; /*match space*/
-      }
-      .floatTest {
-      margin: 60px;
-      border: 1px solid black;
-      float: left;
-      width: 200px;
-      height: 90px;
-      margin: 10px 5px;
-      background: cornflowerblue;
-      }
+         float: left;
+         width: 100%;
+         height: 80%;
+         border: 1px solid black;
+         overflow-x: auto;
+         overflow-y: hidden;
+         white-space: nowrap;
+         font-size: 0; 
+         }
+      .floatText {
+         border: 1px solid black;
+	 height: 100%;
+	 width: 50%;
+	 float: left;
+         }
       .wrapper {
-      position:relative;
-      }
+	 float: left;
+	 border: 1px solid black;
+	 width: 30%;
+	 max-width:100%;
+	/* resize: horizontal;*/
+	 overflow: auto;
+         }
       .tableTest {
-      height: 150px;
-      width: 150px;
-      overflow: auto;
-      }
+        <! -- height: 350px;
+         width: 350px; -->
+	 display:inline-block;
+         max-width: 100%;
+	 height: 100%;
+	 resize:horizontal;
+         overflow: auto;
+         }
       .smallTable {
-      }
-      
-    </style>
-    
+         }
+      #note  {
+         font-size: 25;
+         font-family: "Courier New";
+         height: 100%;
+	 width: 100%;
+	 box-sixing: border-box;
+         }
+    </style> 
   </head>
 
   <body>
     <h1>Test!</h1>
+    <h2>Testing scroll bars and interactive div resizing</h2>
     <div class="container">
-      <div class="tile"></div>
-      <div class="tile"></div>
-      <div class="tile"></div>
-    </div>
-    <div class="floatTest">
-    </div>
-    <h2>It Works!</h2>
+    <div class="floatText">
+      <textarea id="note" readonly="true";>
+      It Works: adding scroll bar into single div
+      In the works: resizing div with table inside containing horizontal scroll
+      resizing widget added, seems to work only on certain width percentages
+      </textarea>
+        </div>
     <div class="wrapper">
     <div class="tableTest">
       <table class="smallTable">
@@ -83,5 +90,7 @@
 	</table>
     </div>
     </div>
+    </div>
+    
   </body>
 </html>
