@@ -9,6 +9,14 @@
           };
         });
     </script>
+
+    <script>
+       $(document).ready(function(){
+          $("#progress").click(function(){
+          $("textarea").toggle();
+          });
+       });
+    </script>
     
     <style>
       table, td {
@@ -32,51 +40,72 @@
       .floatText {
          border: 1px solid black;
 	 height: 100%;
-	 width: 50%;
+	 width: 70%;
 	 float: left;
          }
       .wrapper {
 	 float: left;
 	 border: 1px solid black;
-	 width: 30%;
+	 width: 29%;
 	 max-width:100%;
-	/* resize: horizontal;*/
-	 overflow: auto;
          }
       .tableTest {
-        <! -- height: 350px;
-         width: 350px; -->
 	 display:inline-block;
          max-width: 100%;
 	 height: 100%;
-	 /*resize:horizontal;*/
 	 box-sizing: border-box;
          overflow: auto;
          }
       .smallTable {
+         box-sizing: border-box;
+	 width:100%;
+	 height: 100%;
          }
       #note  {
-         font-size: 25;
-         font-family: "Courier New";
+         font-size: 15;
+	 text-align: justify;
+         font-family: Times New Roman;
          height: 100%;
 	 width: 100%;
 	 box-sixing: border-box;
          }
+			
     </style> 
   </head>
 
   <body>
     <h1>Test!</h1>
     <h2>Testing scroll bars and interactive div resizing</h2>
+    <button id="progress">Progress Report - Click Here to Hide/Show</button>
     <div class="container">
     <div class="floatText">
-      <textarea id="note" readonly="true";>
-      It Works: adding scroll bar into single div
-      In the works: getting the right-side div to resize without reshaping the table
-      resizing widget added, seems to work only on certain width percentages
-      Console log added: "Window Has Been Resized" appears when there is window resizing event
+      <textarea id="note" readonly="true" rows="4";>
+
+&#9827 Description:
+
+This is an HTML file that serves as a place to practice formatting two adjacent div's. The left div only contains text and constitutes 70% of the window width. The right div contains a table and constitutes 25% of the window width. The challenge is to maintain the shape of the table (within the right div) as well as the its width proportional to the left div as the window is being resized.
+
+&#9827 Learned &/or Implemented:
+
+Adding a scoll function into the table would allow the shape of the table to be maintained as the window is being resized. To do this, overflow: auto was added to the styling of the div that contains the table (.tableTest).
+
+The next function that was added was an event function that registered when the window was being resized and prints "Window Has Been Resized" message in the console log. To implement this, a jQuery function was created that to watch for a window resizing event.
+
+&#9827 Lots of useful info found on stackoverflow.com!
+
+
+
+Elements that work:
+
+&#8211 Adding scroll bar into single div: shown on the right.
+&#8211 Message appears in console log informing user that a window resizing event has occured.
+
+
+Elements in progress:
+	
+&#8211 Formatting the text area to look nice.
       </textarea>
-        </div>
+     </div>
     <div class="wrapper">
     <div class="tableTest">
       <table class="smallTable">
