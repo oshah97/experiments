@@ -4,6 +4,8 @@
   <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
   <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <style>
 #myPopup {
@@ -45,12 +47,18 @@ table, th, td {
   white-space: nowrap;
   }
 
-#footer {
+.footer {
   margin: 5%;
   font-size: 15;
   }
 
 </style>
+
+<script>
+   $(document).ready(function() {
+      $("#myPopup").draggable();
+      });
+</script>
 
 </head>
 <body>
@@ -285,8 +293,9 @@ table, th, td {
   </div>
 
   <div data-role="footer">
-   <p id="footer">The "popup" method puts the call-counter table inside of a popup that opens within the window. At this time, the table inside the popup can scorll up and down but cannot scroll in the horizontal direction. The main issue with the table was the weird formatting when the window was sized too small, but that problem persits within the popup method.</p>
-   <p id="footer">Update: popup window automatically resizes the size of the popup when window is resized, and does scroll horiontally when there is overflow. Formatting of table still funky.
+   <p class="footer">The "popup" method puts the call-counter table inside of a popup that opens within the window. At this time, the table inside the popup can scorll up and down but cannot scroll in the horizontal direction. The main issue with the table was the weird formatting when the window was sized too small, but that problem persits within the popup method.</p>
+   <p class="footer">Update: popup window automatically resizes the size of the popup when window is resized, and does scroll horiontally when there is overflow. Formatting of table still funky.</p>
+   <p class="footer">Update: Popup window is "draggable"! jQuery UI was added as source script and that allowed for the creation of a function that made the popup draggable, within the window.</p>
   </div>
 </div> 
 
