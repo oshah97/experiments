@@ -1,0 +1,56 @@
+<html>
+<head>
+
+<title>Open Help Page</title>
+
+<script>
+function openHelp() {
+  var url = 'https://raw.githubusercontent.com/oshah97/experiments/master/initialHtml/sampleHelpPage.html';
+  var popup = window.open(url, "", "width=640,height=480,resizeable,scrollbars"),
+     Help = document.getElementById("data");
+  
+     popup.document.write(Help.outerHTML);
+     popup.document.close();
+}
+</script>
+
+<style>
+
+input {
+  font-size: 50px;
+  margin: 1%;
+  }
+
+.container {
+  border: 1px solid black;
+  margin: 1%;
+  }
+
+h2, h3, .explain {
+  margin: 1%;
+  }
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>This is a page that I am using to practice opening up html files using the open.window function</h2>
+
+<h3>Click the "Help" button below to open a window to page of raw html text:</h3>
+
+<input type="button" value="Help" onclick="openHelp();" />
+
+<p class="explain">This help button was supposed to link to an sample help html file, but the link to that html (which is on my GitHub as well) brings the user to the raw html</p>
+
+<p class="explain">Without using a direct link to a file on this specific isb computer, I haven't figured out how to show an html file</p>
+
+<p class="explain">But it does work when linked to file on desktop computer!</p>
+
+</div>
+
+</body>
+</html>
