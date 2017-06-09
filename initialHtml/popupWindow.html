@@ -1,9 +1,9 @@
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 <style>
 #myPopup {
@@ -41,9 +41,14 @@
   }
 
 table, th, td {
-    border: 1px solid black;
-    
-    }
+  border: 1px solid black;
+  white-space: nowrap;
+  }
+
+#footer {
+  margin: 5%;
+  font-size: 15;
+  }
 
 </style>
 
@@ -52,11 +57,11 @@ table, th, td {
 
 <div data-role="page">
   <div data-role="header">
-    <h1>Welcome To My Homepage</h1>
+    <h1>Testing 'popup' method for Phone Tree Application</h1>
   </div>
 
   <div data-role="main" class="ui-content">
-    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Show Popup</a>
+    <a href="#myPopup" data-rel="popup" class="ui-btn ui-btn-inline ui-corner-all">Show Phone Tree Table</a>
     
     <div data-role="popup" id="myPopup">
       <p>
@@ -280,7 +285,7 @@ table, th, td {
   </div>
 
   <div data-role="footer">
-    <h1>Footer Text</h1>
+   <p id="footer">The "popup" method puts the call-counter table inside of a popup that opens within the window. At this time, the table inside the popup can scorll up and down but cannot scroll in the horizontal direction. The main issue with the table was the weird formatting when the window was sized too small, but that problem persits within the popup method.</p>
   </div>
 </div> 
 
