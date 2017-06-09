@@ -2,6 +2,9 @@ Notes:
 
 jQuery: <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+jQuery UI: <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
 adding a clickable button example:
     <script>
        $(document).ready(function(){
@@ -20,3 +23,10 @@ console log message exmaple:
         });
     </script>
 
+jQuery UI; .draggable() & .resizable():
+<script>
+   $(document).ready(function() {
+      $("#myPopup").draggable();
+      $("#myPopup").resizable();
+      });
+</script>
