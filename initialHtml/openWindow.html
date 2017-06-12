@@ -5,13 +5,8 @@
 
 <script>
 function openHelp() {
-  var url = 'https://raw.githubusercontent.com/oshah97/experiments/master/initialHtml/sampleHelpPage.html';
-  var popup = window.open(url, "", "width=640,height=480,resizeable,scrollbars"),
-     Help = document.getElementById("data");
-  
-     popup.document.write(Help.outerHTML);
-     popup.document.close();
-}
+  window.open("http://localhost:8099/sampleHelpPage.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+  }
 </script>
 
 <style>
