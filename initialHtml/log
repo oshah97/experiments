@@ -31,6 +31,11 @@ jQuery UI; .draggable() & .resizable():
       });
 </script>
 
+To Download webpack:
+- type -a npm
+- cd  /usr/local/bin/npm
+- npm install --save-dev webpack
+
 To open WebPack:
 - Find the directory it's in (in this case: /usr/local/bin/
 - Create a PATH to that file
@@ -38,3 +43,29 @@ To open WebPack:
 
 Original PATH isb desktop:
 /usr/bin:/bin:/usr/sbin:/sbin:/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_9:/Applications/Emacs.app/Contents/MacOS/libexec-x86_64-10_9
+
+To get back to "goldfinger" terminal:
+- C-x C-x
+
+WITHIN ~/.bash_profile
+
+PATH:
+- rename PATH
+PATH=$PATH:"..."
+- to look
+echo $PATH | tr ":" "\n"
+
+Find file:
+- type -a "fileName"
+
+Create bash alias:
+- alias "newName"=command
+
+Finding something in bundle.js:
+- cd webpack-version
+- cd dist
+- grep "..." bundle.js
+
+Webpack current location:
+- npm -> /usr/local/bin/
+- cd to webpack-verion to "make"
