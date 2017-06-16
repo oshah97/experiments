@@ -69,3 +69,12 @@ Finding something in bundle.js:
 Webpack current location:
 - npm -> /usr/local/bin/
 - cd to webpack-verion to "make"
+
+Use Notes to catalog mutiple versions of the same CODE
+
+GitHub: for files on /Users/omar/github/experiments/initialHtml
+- cd into initialHtml
+- pwd
+- git status
+- git add "fileName"
+- git commit -m "Message about update"
