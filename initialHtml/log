@@ -1,3 +1,4 @@
+
 Notes:
 
 jQuery: <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -78,3 +79,4 @@ GitHub: for files on /Users/omar/github/experiments/initialHtml
 - git status
 - git add "fileName"
 - git commit -m "Message about update"
+
