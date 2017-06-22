@@ -1,14 +1,81 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html> <head>
 
-<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript" src="js/jqsimplemenu.js"></script>
-<link rel="stylesheet" href="css/jqsimplemenu.css" type="text/css" />
-  <script type="text/javascript">
-        $(document).ready(function () {
-            $('.menu').jqsimplemenu();
-        });
-    </script>
+<script
+  src="https://code.jquery.com/jquery-1.11.0.min.js">
+ </script>
+
+<style>
+
+.dropdown-menu>li
+{	position:relative;
+	-webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
+	cursor:pointer;
+}
+.dropdown-menu .sub-menu {
+    left: 100%;
+    position: absolute;
+    top: 0;
+    display:none;
+    margin-top: -1px;
+	border-top-left-radius:0;
+	border-bottom-left-radius:0;
+	border-left-color:#fff;
+	box-shadow:none;
+}
+.right-caret:after
+ {	content:"";
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid orange;
+    display: inline-block;
+    height: 0;
+    opacity: 0.8;
+    vertical-align: middle;
+    width: 0;
+	margin-left:5px;
+}
+.left-caret:after
+{	content:"";
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-right: 4px solid orange;
+    display: inline-block;
+    height: 0;
+    opacity: 0.8;
+    vertical-align: middle;
+    width: 0;
+	margin-left:5px;
+}
+
+</style>
+
+<script>
+
+$(function(){
+	$(".dropdown-menu > li > a.trigger").on("click",function(e){
+		var current=$(this).next();
+		var grandparent=$(this).parent().parent();
+		if($(this).hasClass('left-caret')||$(this).hasClass('right-caret'))
+			$(this).toggleClass('right-caret left-caret');
+		grandparent.find('.left-caret').not(this).toggleClass('right-caret left-caret');
+		grandparent.find(".sub-menu:visible").not(current).hide();
+		current.toggle();
+		e.stopPropagation();
+	});
+	$(".dropdown-menu > li > a:not(.trigger)").on("click",function(){
+		var root=$(this).closest('.dropdown');
+		root.find('.left-caret').toggleClass('right-caret left-caret');
+		root.find('.sub-menu:visible').hide();
+	});
+});
+
+</script>
 
 <title>Dropdown Menu Practice</title>
 </head>
@@ -16,27 +83,35 @@
 <body>
 <h1></h1>
 
-<div>
-    <ul class="menu">
-        <li><a href="#">Menu 1</a></li>
-        <li><a href="#">Menu 2</a>
-            <ul>
-                <li><a href="#">Menu 2.1</a></li>
-                <li><a href="#">Menu 2.2</a></li>
-                <li><a href="#">Menu 2.3</a></li>
-            </ul>
-        </li>
-        <li><a href="#">Menu 3</a>
-            <ul>
-                <li><a href="#">Menu 3.1</a></li>
-                <li><a href="#">Menu 3.2</a></li>
-                <li><a href="#">Menu 3.3</a></li>
-            </ul>
-        </li>
-    </ul>
+<div class="dropdown" style="position:relative">
+	<a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Click Here <span class="caret"></span></a>
+	<ul class="dropdown-menu">
+		<li>
+			<a class="trigger right-caret">Level 1</a>
+			<ul class="dropdown-menu sub-menu">
+				<li><a href="#">Level 2</a></li>
+				<li>
+					<a class="trigger right-caret">Level 2</a>
+					<ul class="dropdown-menu sub-menu">
+						<li><a href="#">Level 3</a></li>
+						<li><a href="#">Level 3</a></li>
+						<li>
+							<a class="trigger right-caret">Level 3</a>
+							<ul class="dropdown-menu sub-menu">
+								<li><a href="#">Level 4</a></li>
+								<li><a href="#">Level 4</a></li>
+								<li><a href="#">Level 4</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li><a href="#">Level 2</a></li>
+			</ul>
+		</li>
+		<li><a href="#">Level 1</a></li>
+		<li><a href="#">Level 1</a></li>
+	</ul>
 </div>
-
-
 
 <hr>
 <address></address>
