@@ -79,6 +79,8 @@ GitHub: for files on /Users/omar/github/experiments/initialHtml
 - git status
 - git add "fileName"
 - git commit -m "Message about update"
+- git push origin master
+
 
 Adding toolTip:
 .buttonHelpText {
