@@ -1,10 +1,25 @@
-
-
 Notes:
-jQuery: <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-jQuery UI: <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<------------------------------------------------>
+Links to packages and scripts:
+
+
+jQuery:
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+jQuery UI:
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+QUnit:
+<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.3.css">
+  <script src="https://code.jquery.com/qunit/qunit-2.3.3.js"></script>
+
+
+End Links
+<------------------------------------------------->
+General notes and "tricks":
+
 
 adding a clickable button example:
     <script>
@@ -59,6 +74,9 @@ echo $PATH | tr ":" "\n"
 Find file:
 - type -a "fileName"
 
+Re-type previous command:
+- Esp p
+
 Create bash alias:
 - alias "newName"=command
 
@@ -82,6 +100,8 @@ GitHub: for files on /Users/omar/github/experiments/initialHtml
 - git push origin master
 
 
+End General notes
+<----------------------------------------------->
 Adding toolTip:
 .buttonHelpText {
     visibility: hidden;
@@ -103,3 +123,65 @@ Adding toolTip:
 .menubarButton:hover .buttonHelpText {
     visibility: visible;
 }
+<------------------------------------------------>
+Hiding menu's by clicking on another div:
+
+$("#cyDiv").on("click", function(e) {
+   if($("#knockoutMenuItems").is(":visible") || $("#reactivateMenuItems").is(":visible")) {
+     $("#knockoutMenuItems").hide();
+     $("#reactivateMenuItems").hide();
+     }  // hide the menus if visible
+   e.stopPropagation();
+   e.preventDefault(); // propagation still occurs
+   });
+<------------------------------------------------>
+R Related Things:
+
+
+R, see current directory:
+- getwd
+
+R, keeping a column from a matrix in matrix form:
+- "matrixName"[,1,drop=FALSE]
+
+R, currect directory of matrices availble: ls()
+
+R, remove element from directory: rm(element)
+
+R, Data from excel (as .csv);
+- Auto-read.csv("~/location/of/file")
+- names(Auto)
+- dim(Auto)
+- class(Auto)
+- summary(Auto)
+--- to plot columns of excel file ---
+- plot(Auto$columnName1, Auto$columnName2)
+
+
+R, creating random set of data:
+- set.seed(101)
+- x=matrix(rnorm(100*2),100,2)
+- xmean=matrix(rnorm(8,sd=4),4,2)
+- which=sample(1:4,100,replace=TRUE)
+- x=x+xmean[which,]
+
+k-mean plotting above data:
+- plot(x, col=which,pch=19)
+- km.out=kmeans(x,4,nstart=15)
+- km.out
+- plot(x, col=km.out$cluster,cex=2,pch=1,lwd=2)
+- points(x,col=which,pch=19)
+- points(x,col=c(4,3,2,1)[which],pch=19)
+
+hierarchical cluster plot of above data:
+- hc.complete=hclust(dist(x),method="complete")
+- plot(hc.complete)
+- hc.single=hclust(dist(x),method="single")
+- plot(hc.single)
+- hc.average=hclust(dist(x),method="average")
+- plot(hc.average)
+
+
+End R Stuff
+<---------------------------------------------------->
+
