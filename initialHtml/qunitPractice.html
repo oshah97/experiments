@@ -1,0 +1,60 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit basic example</title>
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.3.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  <script src="https://code.jquery.com/qunit/qunit-2.3.3.js"></script>
+  <script>
+    QUnit.test( "a basic test example", function( assert ) {
+      var value = "hellooo";
+      assert.equal(value, "hello", "We expect value to be hello" );
+      });
+    QUnit.test( "ok test", function( assert ) {
+      assert.ok( true, "true succeeds" );
+      assert.ok( "non-empty", "non-empty string succeeds" );  
+      assert.ok( false, "false fails" );
+      assert.ok( 0, "0 fails" );
+      assert.ok( NaN, "NaN fails" );
+      assert.ok( "", "empty string fails" );
+      assert.ok( null, "null fails" );
+      assert.ok( undefined, "undefined fails" );
+      });
+    QUnit.test( "deepEqual test", function( assert ) {
+      var obj = { foo: "bar fight" };
+      assert.deepEqual( obj, { foo: "bar" }, "Two objects can be the same in value" );
+      });
+    function KeyLogger( target ) {
+      this.target = target;
+      this.log = [];
+      var that = this;
+      this.target.off( "keydown" ).on( "keydown", function( event ) {
+        that.log.push( event.keyCode );
+        });
+      }
+    QUnit.test( "keylogger api behavior", function( assert ) {
+      var doc = $( document ),
+      keys = new KeyLogger( doc );
+
+      // Trigger the key event
+      doc.trigger( $.Event( "keydown", { keyCode: 9 } ) );
+ 
+      // Verify expected behavior
+      assert.deepEqual( keys.log, [ 9 ], "correct key was logged" );
+      });
+    QUnit.test( "a test", function( assert ) {
+      assert.expect( 1 );
+      var $body = $( "body" );
+      var done = assert.async();
+      $body.on( "click", function() {
+        assert.ok( true, "body was clicked!" );
+        });
+      $body.trigger( "click" );
+      });
+  </script>
+</body>
+</html>
