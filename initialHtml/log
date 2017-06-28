@@ -135,6 +135,48 @@ $("#cyDiv").on("click", function(e) {
    e.preventDefault(); // propagation still occurs
    });
 <------------------------------------------------>
+iQuery and QUnit for unit testing:
+
+
+- Use an assertion as basis to see if things "pass" or "fail"
+
+- assert.equal determines if the value of something is equal to the expected value. Ex:
+- equal(actual, expected [, message])
+QUnit.test( "a basic test example", function( assert ) {
+      var value = "hello";
+      assert.equal(value, "hello", "We expect value to be hello" );
+    });
+
+- assert.ok determines if the string or argument is "true" and if it is, it passed. Ex:
+- ok(truthy [, message])
+    QUnit.test( "ok test", function( assert ) {
+      assert.ok( true, "true succeeds" );
+      assert.ok( "non-empty", "non-empty string succeeds" );  
+      assert.ok( false, "false fails" );
+      assert.ok( 0, "0 fails" );
+      assert.ok( NaN, "NaN fails" );
+      assert.ok( "", "empty string fails" );
+      assert.ok( null, "null fails" );
+      assert.ok( undefined, "undefined fails" );
+    });
+
+- assert.deepEqual is the same as assert.equal but uses (===) as its basis for passing
+
+Example using assert.expect() & assert.async();
+assert.async() tells the test that the action was complete
+    QUnit.test( "a test", function( assert ) {
+      assert.expect( 1 );
+      var $body = $( "body" );
+      var done = assert.async();
+      $body.on( "click", function() {
+      assert.ok( true, "body was clicked!" );
+      });
+      $body.trigger( "click" );
+      }); //passes test when body is clicked
+
+
+End QUnit
+<------------------------------------------------>
 R Related Things:
 
 
