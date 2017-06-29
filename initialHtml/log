@@ -1,5 +1,23 @@
 Notes:
 
+<----------------------------------------------->
+~/.bash_profile config. (change depending on computer in use)
+
+PATH=/usr/bin
+PATH=$PATH:/bin
+PATH=$PATH:/usr/sbin
+PATH=$PATH:/sbin
+# PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_9
+# PATH=$PATH:/Applications/Emacs.app/Contents/MacOS/libexec-x86_64-10_9
+PATH=$PATH:/usr/local/bin
+
+export PATH
+
+PS1="goldfinger.\W> "
+alias dir="ls -l"
+alias ddir="ls -l | grep '^d'"
+
+End ~/.bash_profile configuration
 <------------------------------------------------>
 Links to packages and scripts:
 
@@ -61,7 +79,7 @@ Original PATH isb desktop:
 /usr/bin:/bin:/usr/sbin:/sbin:/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_9:/Applications/Emacs.app/Contents/MacOS/libexec-x86_64-10_9
 
 To get back to "goldfinger" terminal:
-- C-x C-x
+- C-c C-c
 
 WITHIN ~/.bash_profile
 
@@ -72,7 +90,10 @@ PATH=$PATH:"..."
 echo $PATH | tr ":" "\n"
 
 Find file:
-- type -a "fileName"
+- type -a fileName
+OR
+- find . -name "*place to look" -print //does not find well
+- grep fileName "*place to look"
 
 Re-type previous command:
 - Esp p
@@ -87,7 +108,7 @@ Finding something in bundle.js:
 
 Webpack current location:
 - npm -> /usr/local/bin/
-- cd to webpack-verion to "make"
+- cd to webpack-verion and enter "make"
 
 Use Notes to catalog mutiple versions of the same CODE
 
