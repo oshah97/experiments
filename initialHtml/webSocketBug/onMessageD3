@@ -1,0 +1,24 @@
+         printf("=== new message received") #d3
+         message <- fromJSON(rawMessage); #d3
+         .lastMessage <<- message
+         if(!is(message, "list")) { #d3
+             printf("new websocket message is not a list");
+             return;
+             }
+         if (! "cmd" %in% names(message)){
+             printf("new websocket messages has no 'cmd' field");
+             return;
+             }
+         cmd <- message$cmd
+         if(cmd == "handleSelection"){
+            printf("--- calling handleSelection");
+            #browser();
+            printf(" selected points: %s", paste(message$payload, collapse=","));
+            handleSelection(message)
+            }
+         else if(cmd == "ping"){
+            printf("--- received ping");
+            }
+         else{
+            printf("unrecognized incoming command: %s",  cmd);
+            XS}
