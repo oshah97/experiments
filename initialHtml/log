@@ -1,7 +1,8 @@
 Notes:
 
 <----------------------------------------------->
-~/.bash_profile config. (change depending on computer in use)
+~/.bashrce config. (change depending on computer in use)
+~/.bash_profile (contains source ~/.bashrc)
 
 PATH=/usr/bin
 PATH=$PATH:/bin
@@ -17,7 +18,17 @@ PS1="goldfinger.\W> "
 alias dir="ls -l"
 alias ddir="ls -l | grep '^d'"
 
-End ~/.bash_profile configuration
+End ~/.bashrc configuration
+<------------------------------------------------>
+~/.Rprofile configuration (Paul's configuration)
+
+printf = function (...) print (noquote (sprintf (...)))
+q <- function(...) quit("no")
+wdth <- function(x){options(width=x)}
+wdth(2048)
+biocGet <- function(pkgName){source("http://bioconductor.org/biocLite.R"); biocLite(pkgName)}
+
+End ~/.Rprofile configuration
 <------------------------------------------------>
 Links to packages and scripts:
 
