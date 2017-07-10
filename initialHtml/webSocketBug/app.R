@@ -1,12 +1,9 @@
 library(httpuv)
 library(jsonlite)
-
-myws <- NULL
-
-.lastMessage <- NULL
 #--------------------------------------------------------------------------------
-setup <- function(wsCon)
+configureWebSocketServer <- function(wsCon)
 {
+   wsCon <- new.env(parent=emptyenv())
    wsCon$open <- FALSE
    wsCon$wsID <- NULL
    wsCon$ws <- NULL
@@ -27,38 +24,42 @@ setup <- function(wsCon)
       wsCon$ws <- ws
       ws$onMessage(function(binary, rawMessage) {
 
-          print(rawMessage)
+          print(fromJSON(rawMessage))
 
          }) # onMessage
        wsCon$open <- TRUE
        } # onWSOpen
 
-   wsCon
+   return(wsCon)
 
-} # setup
+} # configureWebSocketServer
 #--------------------------------------------------------------------------------
 my.send <- function(wsCon, msg)
 {
   #  browser()
-  wsCon$ws$send(toJSON(msg))
+  wsCon$ws$send(toJSON(msg, auto_unbox=TRUE))
 
 } # send
 #--------------------------------------------------------------------------------
-wsCon <- new.env(parent=emptyenv())
-#--------------------------------------------------------------------------------
-demo <- function()
+init <- function()
 {
-   wsCon <- setup(wsCon)
-   port <- 8543
+   wsCon <- configureWebSocketServer()
+   port <- 8549
    browseURL(sprintf("http://localhost:%d", port))
    wsCon$id <- startDaemonizedServer("0.0.0.0", port, wsCon)
+   return(wsCon)
 
-   Sys.sleep(2)
+} # init
+#--------------------------------------------------------------------------------
+demo <- function(wsCon)
+{
+   printf("about to send test1 to browser for capitalization")
    my.send(wsCon, "test1")
    Sys.sleep(2)
 
+   printf("about to send a second message...");
    my.send(wsCon, "WebSocket Works!")
-   Sys.sleep(2)
+
 
 } # demo
-#--------------------------------------------------------------------------------
+#------------------------------------------------------------------------------
