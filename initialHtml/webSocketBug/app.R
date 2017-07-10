@@ -44,7 +44,7 @@ my.send <- function(wsCon, msg)
 init <- function()
 {
    wsCon <- configureWebSocketServer()
-   port <- 8549
+   port <- 8550
    browseURL(sprintf("http://localhost:%d", port))
    wsCon$id <- startDaemonizedServer("0.0.0.0", port, wsCon)
    return(wsCon)
@@ -63,3 +63,15 @@ demo <- function(wsCon)
 
 } # demo
 #------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------
+toUpperCase <- function(wsCon, string)
+{
+  msg <- toJSON(list(cmd="toUpperCase", callback="handleUpperCaseResult", payload=string))
+  wsCon$ws$send(msg)
+
+} # toUPpperCase
+#--------------------------------------------------------------------------------
+
+
+
+
