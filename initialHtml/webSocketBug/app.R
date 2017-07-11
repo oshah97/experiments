@@ -1,6 +1,8 @@
 library(httpuv)
 library(jsonlite)
 #--------------------------------------------------------------------------------
+.lastMessage <- NULL;
+#--------------------------------------------------------------------------------
 configureWebSocketServer <- function(wsCon)
 {
    wsCon <- new.env(parent=emptyenv())
@@ -23,9 +25,8 @@ configureWebSocketServer <- function(wsCon)
    wsCon$onWSOpen = function(ws) {
       wsCon$ws <- ws
       ws$onMessage(function(binary, rawMessage) {
-
-          print(fromJSON(rawMessage))
-
+          #print(fromJSON(rawMessage))
+          .lastMessage <<- fromJSON(rawMessage);
          }) # onMessage
        wsCon$open <- TRUE
        } # onWSOpen
@@ -37,14 +38,14 @@ configureWebSocketServer <- function(wsCon)
 my.send <- function(wsCon, msg)
 {
   #  browser()
-  wsCon$ws$send(toJSON(msg, auto_unbox=TRUE))
+    wsCon$ws$send(toJSON(msg, auto_unbox=TRUE))
 
 } # send
 #--------------------------------------------------------------------------------
 init <- function()
 {
    wsCon <- configureWebSocketServer()
-   port <- 8550
+   port <- 8602
    browseURL(sprintf("http://localhost:%d", port))
    wsCon$id <- startDaemonizedServer("0.0.0.0", port, wsCon)
    return(wsCon)
@@ -66,8 +67,15 @@ demo <- function(wsCon)
 #--------------------------------------------------------------------------------
 toUpperCase <- function(wsCon, string)
 {
-  msg <- toJSON(list(cmd="toUpperCase", callback="handleUpperCaseResult", payload=string))
-  wsCon$ws$send(msg)
+    .lastMessage <<- NULL
+    msg <- toJSON(list(cmd="toUpperCase", callback="handleUpperCaseResult", payload=string), auto_unbox=TRUE)
+    wsCon$ws$send(msg)
+
+    while(is.null(.lastMessage)){
+       Sys.sleep(0.1)
+       }
+
+    return(.lastMessage$payload)
 
 } # toUPpperCase
 #--------------------------------------------------------------------------------

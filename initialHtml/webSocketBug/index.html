@@ -12,18 +12,34 @@ pre { margin: 0 }
   var ws = new WebSocket(socketURI);
   ws.onmessage = function(msg) {
      var msgDiv = document.getElementById("outputDiv");
-     var incomingText = msg.data
+     var incomingMessage = JSON.parse(msg.data);
+     console.log("incoming message: "); 
+     console.log(incomingMessage);
+     var cmd = incomingMessage.cmd;
+     var payload = incomingMessage.payload;
      console.log("msg.data");
      console.log(msg.data);
-     msg = JSON.parse(msg.data); // d3;
-     var outgoingText = incomingText.toUpperCase()
-     msgDiv.innerHTML = "<b>received:</b> " + incomingText + "<br><b>returning: </b> " + outgoingText;
-     console.log(incomingText);
-     console.log(outgoingText)
-     ws.send(outgoingText);
-     ws.send(JSON.stringify(returnMsg));
+     var outgoingText;
+     var callback = incomingMessage.callback;
+     var status = "success"  // be optimistic
+     if(cmd == "toUpperCase"){
+         outgoingText = payload.toUpperCase()
+         }
+      else if (cmd == "toLowerCase"){
+         outgoingText = payload.toLowerCase()
+         }
+      else{
+	 outgoingText = "unrecognized command '" + cmd + "'";
+         status = "failure";
+         }
+     msgDiv.innerHTML = "<b>received:</b> " + payload + "<br><b>returning: </b> " + outgoingText;
+      returnMessage = JSON.stringify( {cmd: callback,
+				      status: status,
+				      payload: outgoingText
+ 				     });
 
-
+     console.log(returnMessage);
+     ws.send(returnMessage);
   
      }
 
