@@ -1,0 +1,77 @@
+Notes on WebSocket Demos (/asyncWebSockets)	
+Daemon-echo/app.R
+i.	Calls ‘httpuv’ and ‘jsonlite’, used no global variables
+ii.	Functions:
+a.	wsCon <- new.env(parent=emptyenv()) creates a new environment called ‘wsCon’ that has an empty environment as its parent.
+b.	Setup <- function(wsCon)
+i.	Setup uses a new environment – wsCon – and creates/assigns objects within that environment. The objects are ‘open’ <- FASLE, ‘wsID’ <- NULL, ‘ws’ <- NULL, ‘result’ <- NULL. ‘open’ is FALSE by default, but is TRUE when a message is received by the browser through the websocket. ‘ID’ is an unused object. ‘ws’ is used as an argument within the function onWSOpen and is its object value is assigned as ‘ws’ (wsCon$ws <- ws). Will come back to wsCon$onWSOpen function. ‘result’ is an unused object.
+ii.	wsCon$call is a function a that uses “req” as an argument. The first action of this function is defining the URL of the websocket using the variable wsURL. wsURL is set as equal to the concatenated vector of three strings converted into characters and an ifelse function (using the paste function). The ifelse function says that if the HTTP_HOST (the server a request is coming from) is null/ empty then the WebSocket will use SERVER_NAME (the server that opened the WebSocket), otherwise it will use the server the request came from (HTTP_HOST). The second action of ‘call’ creates a list with ‘status’, ‘headers’ and ‘body’ as the objects. ‘status’ is set to 200L – “L” denoting it as an integer. ‘headers’ creates another list with a single object that the sets the content-type of the WebSocket as html text. ‘body’ uses c() – vectoring function – and selects index.html to be the body of WebSocket when opened.
+iii.	wsCon$onWSOpen is a function that requires ‘ws’ as an argument. The object ‘ws’ within the environment wsCon is defined solely as ‘ws’. The named element ‘ws’ is extracted ($) and “attached” to the onMessage function (is triggered a when a message is received in the specified environment, from R), which accepts binary or rawMessage (raw encoded JSON value – from JSON library). When ws$onMessage receives message from the browser, it prints the raw message that is received. The final action of wCon$onWSOpen is changing the value of ‘open’ from FALSE – It’s locally defined value – to TRUE.
+c.	Send <- function(wsCon, msg)
+i.	Send is a function that accepts two arguments; wsCon and msg. The first argument calls wsCon as the environment and the second is the message that is being sent from the SERVER_NAME or the “home server” –i.e. “test1”.
+d.	Demo <- function()
+i.	Demo is function that takes no arguments and calls setup() and send() when it is called. Demo() defines ‘wsCon’ as setup(wsCon), which calls the setup() function when ‘wsCon’ is used as an argument. ‘port’ is assigned the value 8872 which is the site of the local port the WebSocket will open into. ‘browseURL’ inserts the port value, assigned above, into the desired address – http://localhost:%d - using sprintf() which used characters like %d as placeholders for the second argument. In this case the second argument was ‘port’. ‘wsCon$id is assigned the function startDaemonizedServer(“0.0.0.0”, port, wsCon). startDaemonizedServer creates a WebSocket server on a specific host and port. The term ‘daemonized’ means that an interactive R session is not blocked. The “0.0.0.0” means that all IP addresses will be listened to, ‘port’ calls its assigned value and ‘wsCon’ calls the setup function to create the WebSocket, now that it has a specific location to open into.
+ii.	The second and third actions of this function sends two messages (strings) through the WebSocket to the open browser. The function is told to interrupt itself for two seconds using the command Sys.sleep(2), then calls the send function with the argument ‘wsCon’ and the message “test1” and then interrupts itself for two more seconds (Sys.sleep(2)). After these two seconds, the second message, “test2” is sent out to the browser as a string and the function interrupts itself for two more seconds before ending.
+
+Daemon-echo/index.html
+i.	<Head>
+a.	contains the title “~/s/example/R/websocket/httpuv/daomonEchol
+b.	style is written in css and chooses Helvetica as the font family and a margin of zero
+c.	the <script> contains two variable and two functions. The first variable is socketURI is set equal to window.locaton.href.replace() which replaces the default setting of opening a browser using http:// with ws://. The next variable is ws which is defined (locally) as a new WebSocket(socketURI). ‘ws’ creates a new WebSocket using ws:// when called. ws.onmessage is a function triggered when the WebSocket receives a message (msg), and contains the variables ‘incomingText’, ‘outgoingText’ and ‘msgDiv’. ‘msgDiv’ is the ‘outputDiv’, which an empty div created to hold the message of what was received and what was sent back. ‘incomingText’ is a variable that stores the data within the message received (incomingText  = msg.data) and the variable outgoingText takes the data from the message – stored in incomingText – and converts it into capitalized letters using the function toUpperCase() (incomingText.toUpperCase()). The next part of the script accesses the inside of the empty msgDiv (msgDiv.innerHtml) and replaces everything inside of it with two strings, “received: ” & “returning: ”, and includes the contents of incomingText and outgoingText next to their respective tags. The console log then prints the contents of incomingText and outgoingText. ws.send(outgoingText) sends the contents of outgoingText back to the server the initial message was received from.
+d.	Function sendInput() 
+i.	SendInput() sends the ‘input’ but input is not defined anywhere else and when this function is removed from index.html, it has no effect on the WebSocket function.
+ii.	<body>
+a.	a single div, msgDiv, in which the received and outgoing messages are placed.
+
+Daemon-JSON-jquery-d3/app.R
+i.	Calls ‘httpuv’ and ‘jsonlite’ libraries. 
+ii.	Global variable:
+a.	 myws <- NULL, placeholder, globally defined as ‘ws’ in onWSOpen
+b.	.lastMessage <-NULL, stores the message
+iii.	Functions: does not utilize an environment
+a.	Server.config
+i.	Server.config contains two main functions. The first is ‘call’ which, exactly like daemon-echo/app.R, chooses which server to open the WebSocket in and what the content type and the .html file the WebSocket will use when it’s opened.
+ii.	onWSOpen = function(ws) first globally sets the NULL variable myws to ws (myws <<- ws). ws$onMessage is a function that is triggered when a message is received in ws (?). The message is received in either binary or rawMessage. When a message is received, “=== new message” is printed in R. ‘message’ then stores the parsed raw message (message <- fromJSON(rawMessage)) and ‘message’ is stored, gobally, in .lastMessage. 
+iii.	Next come a set of “if” statements. The first of which asks if the message that is being received is a list or not. If it is not a list, it prints “new websocket message not a list”. If the word ‘cmd’ is not found in the names given by the message, “new websocket message had not ‘cmd’ field is printed”. If the ‘message’ in the cmd field is equal in value to “handleSelection”, R prints “--- calling handleSelection”, then prints “ selected points: “ and the payload from the message received from the websocket, which should be the names of the points selected. Runs handleSelection(message). If none of those criteria are met, the code checks to see if there is a ‘ping’ command and if there is, print “--- received ping”, otherwise, if the function cannot find any of these commands, “unrecognized incoming command: %s” is printed with the unrecognized command printed on the tail.
+b.	Go <- function()
+i.	Defines the ‘port’ as 9454, defines the browseURL as sprint(http://localhost:%d, port)) which tells the browser to open the WebSocket within the local network on the port specified by ‘port’. ‘server’ is defined by startDaemonizedServer(“0.0.0.0”, port, server.config). Like wsCon$id above, intiallizes a server that protects interctive R sessions while listening to all IP addresses, opening to the specified port and calling the function server.config, which tell the WebSocket what to do with any messages is receives.
+c.	Stop <- function(server)
+i.	Stop is a function that takes the argument ‘server’, defined above as the variable that stores the startDaemonizedServer() function. Stop only has one action, using the function stopDaemonizedServer(server) to end communication between the R session and the browser. Closes the WebSocket.
+d.	Send <- function(cmd)
+i.	Send a message from the open R session through the WebSocket to the open browser. The function takes cmd as the argument. The function within send converts the sent message to JSON (toJSON) and the second argument in the function, auto_unbox=TRUE, “unboxes” unit vectors that are jsonified so they are not returned in an array, but as atomic vectors. 
+e.	SelectByName <- function(names=c(“…”, “…”)
+i.	This is a function that passes a name of one of the cars listed on MTCARS as an argument (i.e. “Merc 230”, “Ferrari Dino”). The first variable in this function is ‘msg’, which is locally defined as list(cmd=”selectByName”, callback=” “, payload=names). This tells the WebSocket to check the index.html to see what to do from a command from “selectByName” and that the payload is ‘names’ which contains all the names of the cars in MTCARS. ‘myws$send()’ sends the JSONified msg, which is then unboxed as an atomic vector. This function just sends a name of a car in a string and tells the WebSocket which command to use to figure out what to do with it.
+f.	clearSelection <- function()
+i.	Similar to selectByName(), but does not pass any arguments through the function. Functions sends a message to the WebSocket from the R session that tells the WebSocket which command to execute. In this case it is told to execute the clearSelection command when it received this message.
+g.	testPlot <- function()
+i.	Contains three variables. ‘mpg’ is defined by mtcars$mpg which calls the mtcars dataset and, more specifically, calls the object ‘mpg’ within mtcars. This most likely contains the list that keeps track of the mpg’s of each car. ‘disp’ is defined by mtcars$disp which does the same thing as mtcars$mpg, but instead accesses the list containing the displacement of all of the cars. ‘names’ is defined by rownames(mtcars) which takes all the row names from the data.frame, mtcars.
+ii.	The msg that this function sends to the WebSocket is more complicated because it is giving the WebSocket all the information it needs to create a plot in the browser. The ‘msg’ variable stores a list with the command for the WebSocket to use plotxy, and the payload details what the x-axis data should be, what the y-axis should be, the maximum and minimums on either axis and that the names of these points are given by the variable ‘names’. ‘msg’ is JSONified and sent, to be unboxed upon arrival.
+h.	GetSelection <- function()
+i.	GetSelection() is a function that passes no arguments. It globally defines .lastMessage as NULL (.lastMessage <<- NULL). The message that is to be sent to the WebSocket tells the WebSocket to use the command getSelection on the payload it is receiving.. which is nothing.. but it knows to use the command getSelection(). The callback is the handleSelection() function which means that when the message is sent to the WebSocket, it sends back a request to initialize the handleSelection() function with a payload from the WebSocket, which is described in the next paragraph. The second part of this function is while(is.null(.lastMessage)), which checks to see if the variable .lastMessage is NULL, and if it is, “sleeping in getSelection, waiting on .lastMessage” is printed in R, then the system interrupts itself (sys.sleep(1)) and then checks .lastMessage again for any sign of content. Once content is detected, .lastMessage (which is anything but NULL at this point) is printed in R. What is printed should be the names of the points selected in the test plot in the browser.
+i.	handleSelection <- function(message)
+i.	handleSelection() passes ‘message’ as an argument. handleSelection() is called when the function getSelection() is called in the R sessioin. The WebSocket is told to call back the home server with a request to call handleSelection() and payload in the variable ‘message’ that can be accessed by the handleSelection() function. This function defines the variable ‘.lastMessage’ as the payload within the ‘message’ sent from the WebSocket, which will hopefully be the names of points selected within the plot.
+
+Daemon-JSON-jquery-d3/index.html
+i.	<head>
+a.	jQuery, jQuery UI, oncoscape d3 libraries
+b.	<style> sets the margins, font sizing and style
+c.	<script> variables created; ‘ws’, ‘plotDiv’, ‘currentDataSet, currentData’, ‘dataReceived’, ‘d3plotDiv’, ‘d3brush, selectedRegion’
+i.	‘plotDiv’, ‘payload’, ‘d3plotDiv’, ‘d3brush, selectedRegion’, ‘currentDataSet currentData’ are just variable with out definition or assignment.
+ii.	‘ws’ opens a new WebSocket in the port 9454 on the local server. ‘dataReceived’ is set to FALSE.
+d.	$(document).ready(function() {… waits for the document to be ready and prints “===document ready” in the console.log and then calls the function pageSetup().
+e.	Function pageSetup()
+i.	Prints “=== pageSetup” in the console log. ‘plotDiv’ is defined by the div #plotDiv. D3plotDiv is defined by d3.select(“#plotDiv”) which calls the variable d3plotDiv when the plotDiv is selected. Window resizing functions added.
+f.	ws.onmessage = function(msg)
+i.	function ws.onmessage assigns JSON.parse(msg.data) to ‘msg’ which takes the data within the message receives and parses it out of JSON. “=== ws.onmessage” and the ‘msg’ are printed into the console.log. Dispatch Message sends ‘msg’ back to the home server.
+g.	Function brushReader()
+i.	Hard to figure out
+h.	Function sentInput()
+i.	Creates variable input and is set equal to document.getElementById(‘input’)
+ii.	Ws.send(input.value) sends the input value through the WebSocket, but input is not defined in the .html or the .R for this demo.
+i.	Function display(text)
+i.	The #output div is set to read .text or set to become a .text div that displays ‘text’ within it. ‘text’ is still undefined variable
+j.	Function dispatchMessage(msg)
+i.	Console prints text and the ‘msg’. The role of this function as the message dispatcher is to send the message received  from the home server to the function that was called in the ‘msg’ sent. In each ‘case’, whether is it ‘ping’, ‘plotxy’, ‘getSelection’, ‘selectByName’, ‘clearSelection’, the payload in the message received is dispatched its respective function (i.e. getSelection(msg.payload).
+k.	Function handlePing(payload)
+i.	ReturnMsg variable is set equal to a list with the command, payload.callback, and the payload Date() which is function for the date. Ws.send(JSON.stringify(returnMsg)) is the second half of the function and it converts the returnMsg into a JSONified string and send its to the WebSocket.
+l.	Other functions are the important ones… getSelection(), d3plot(), selectByName(), clearSelection()…
