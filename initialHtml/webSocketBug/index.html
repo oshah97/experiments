@@ -21,33 +21,63 @@ pre { margin: 0 }
      console.log(msg.data);
      var outgoingText;
      var callback = incomingMessage.callback;
-     var status = "success"  // be optimistic
-     if(cmd == "toUpperCase"){
-         outgoingText = payload.toUpperCase()
-         }
-      else if (cmd == "toLowerCase"){
-         outgoingText = payload.toLowerCase()
-         }
-      else{
-	 outgoingText = "unrecognized command '" + cmd + "'";
-         status = "failure";
-         }
+     var status = "success";  // be optimistic
+     dispatchMessage(incomingMessage);
      msgDiv.innerHTML = "<b>received:</b> " + payload + "<br><b>returning: </b> " + outgoingText;
-      returnMessage = JSON.stringify( {cmd: callback,
-				      status: status,
-				      payload: outgoingText
- 				     });
 
-     console.log(returnMessage);
-     ws.send(returnMessage);
-  
      }
 
-  function sendInput() {
-     var input = document.getElementById('input');
-     ws.send(input.value);
-     input.value = '';
-     }
+     function dispatchMessage(incomingMessage) {
+         console.log("--- dispatchMessage")
+	 var cmd = incomingMessage.cmd;
+         var payload = incomingMessage.payload;
+	 switch(cmd) {
+	    case "toUpperCase":
+	       upperCase(payload);
+      	       break;
+	    case "toLowerCase":
+               lowerCase(payload);
+	       break;
+	    case "toVectorSum":
+	       vectorSum(payload);
+	       break;
+	       }
+	 }
+
+      function upperCase(payload) {
+          outgoingText = payload.toUpperCase();
+	  returnMessage = JSON.stringify({cmd: payload.callback,
+	                                       callback: "",
+					       payload: outgoingText});
+          console.log(outgoingText);
+	  ws.send(returnMessage);
+	  }
+
+      function lowerCase(payload) {
+          outgoingText = payload.toLowerCase();
+	  returnMessage = JSON.stringify({cmd: payload.callback,
+	                                  callback: "",
+					  payload: outgoingText});
+          console.log(outgoingText);
+	  ws.send(returnMessage);
+	  }
+
+      function vectorSum(payload) {
+          outgoingText =addVector(payload);
+	  returnMessage = JSON.stringify({cmd: payload.callback,
+	                                  callback: "",
+					  payload: outgoingText});
+          console.log(outgoingText);
+	  ws.send(returnMessage);
+	  }
+
+      function addVector(vec) {
+          var total = 0;
+	  for(i=0; i<vec.length; i++) {
+	     total += vec[i];
+	     };
+          return(total);
+	  }
 </script>
 
 </head>

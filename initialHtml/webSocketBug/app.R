@@ -45,7 +45,7 @@ my.send <- function(wsCon, msg)
 init <- function()
 {
    wsCon <- configureWebSocketServer()
-   port <- 8602
+   port <- 8626
    browseURL(sprintf("http://localhost:%d", port))
    wsCon$id <- startDaemonizedServer("0.0.0.0", port, wsCon)
    return(wsCon)
@@ -63,13 +63,12 @@ demo <- function(wsCon)
 
 
 } # demo
-#------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------
 toUpperCase <- function(wsCon, string)
 {
     .lastMessage <<- NULL
-    msg <- toJSON(list(cmd="toUpperCase", callback="handleUpperCaseResult", payload=string), auto_unbox=TRUE)
-    wsCon$ws$send(msg)
+    msg <- list(cmd="toUpperCase", callback="handleResult", payload=string)
+    my.send(wsCon, msg)
 
     while(is.null(.lastMessage)){
        Sys.sleep(0.1)
@@ -79,7 +78,34 @@ toUpperCase <- function(wsCon, string)
 
 } # toUPpperCase
 #--------------------------------------------------------------------------------
+toLowerCase <- function(wsCon, string)
+{
+    .lastMessage <<- NULL
+    msg <- list(cmd="toLowerCase", callback="handleResult", payload=string)
+    my.send(wsCon, msg)
 
+    while(is.null(.lastMessage)){
+       Sys.sleep(0.1)
+       }
 
+    return(.lastMessage$payload)
 
+} # toLowerCase
+#--------------------------------------------------------------------------------
+toVectorSum <-  function(wsCon, vector=c(1,2,3)) {
+    .lastMessage <<- NULL
+    msg <- list(cmd="toVectorSum", callback="handleResult", payload=vector)
+    my.send(wsCon, msg)
 
+    while(is.null(.lastMessage)){
+        Sys.sleep(0.1)
+        }
+    return(.lastMessage$payload)
+    } #toVectorSum
+#--------------------------------------------------------------------------------
+handleResult <- function(message) {
+    printf("---handleResult")
+    .lastMessage <<- message$payload
+    NULL
+    }
+#--------------------------------------------------------------------------------
