@@ -41,7 +41,10 @@ pre { margin: 0 }
 	    case "toVectorSum":
 	       vectorSum(payload);
 	       break;
-	       }
+            case "toMatrixPrint":
+               matrixPrint(payload);
+               break;
+            }
 	 }
 
       function upperCase(payload) {
@@ -63,11 +66,20 @@ pre { margin: 0 }
 	  }
 
       function vectorSum(payload) {
-          outgoingText =addVector(payload);
+          outgoingNumber = addVector(payload);
 	  returnMessage = JSON.stringify({cmd: payload.callback,
 	                                  callback: "",
-					  payload: outgoingText});
-          console.log(outgoingText);
+					  payload: outgoingNumber});
+          console.log(outgoingNumber);
+	  ws.send(returnMessage);
+	  }
+
+      function matrixPrint(payload) {
+          outgoingMatrix = doubleValues(payload);
+	  returnMessage = JSON.stringify( {cmd: payload.callback,
+	                                        callback: "",
+						payload: outgoingMatrix});
+          console.log(outgoingMatrix);
 	  ws.send(returnMessage);
 	  }
 
@@ -78,6 +90,18 @@ pre { margin: 0 }
 	     };
           return(total);
 	  }
+
+       function doubleValues(mat) {
+          for(r=0; r<mat.length; r++) {
+	     for(i=0; i<mat[0].length; i++) {
+	        value = mat[r][i]; mat[r][i] = 2 * value
+		} //for i
+	      }// for r
+          return(mat);
+          }
+          
+
+
 </script>
 
 </head>

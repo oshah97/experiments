@@ -45,7 +45,7 @@ my.send <- function(wsCon, msg)
 init <- function()
 {
    wsCon <- configureWebSocketServer()
-   port <- 8626
+   port <- 8642
    browseURL(sprintf("http://localhost:%d", port))
    wsCon$id <- startDaemonizedServer("0.0.0.0", port, wsCon)
    return(wsCon)
@@ -102,6 +102,22 @@ toVectorSum <-  function(wsCon, vector=c(1,2,3)) {
         }
     return(.lastMessage$payload)
     } #toVectorSum
+#--------------------------------------------------------------------------------
+toMatrixPrint <- function(wsCon, mat=matrix(
+                                     c(1,2,3,4,5,6,7,8,9),
+                                     nrow=3,
+                                     ncol=3,
+                                     byrow=TRUE)) {
+    .lastMessage <<- NULL
+    msg <- list(cmd="toMatrixPrint",
+                callback="handleResult",
+                payload=mat)
+    my.send(wsCon, msg)
+    while(is.null(.lastMessage)) {
+        Sys.sleep(0.1)
+        }
+    return(.lastMessage$payload)
+    } #toMatrixPrint
 #--------------------------------------------------------------------------------
 handleResult <- function(message) {
     printf("---handleResult")
