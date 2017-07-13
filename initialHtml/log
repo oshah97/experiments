@@ -313,6 +313,15 @@ function dispatchMessage(incomingMessage) {
           return(total);
 	  }
 
+      function doubleValues(mat) { //doubles the value of matrix stored as arrays within arrays
+          for(r=0; r<mat.length; r++) {
+	     for(i=0; i<mat[0].length; i++) {
+	        value = mat[r][i]; mat[r][i] = 2 * value
+		} //for i
+	      }// for r
+          return(mat);
+          }
+
 End webSocketBug/app.R & index.html
 <------------------------------------------------>
 R Related Things:
