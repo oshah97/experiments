@@ -209,6 +209,112 @@ assert.async() tells the test that the action was complete
 
 End QUnit
 <------------------------------------------------>
+Fucntions added to webSocketBug/app.R & index.html that create uppercase, lowercase and vector sum functions
+
+APP.R
+
+toUpperCase <- function(wsCon, string)
+{
+    .lastMessage <<- NULL
+    msg <- list(cmd="toUpperCase", callback="handleResult", payload=string)
+    my.send(wsCon, msg)
+
+    while(is.null(.lastMessage)){
+       Sys.sleep(0.1)
+       }
+
+    return(.lastMessage$payload)
+
+} # toUPpperCase
+#--------------------------------------------------------------------------------
+toLowerCase <- function(wsCon, string)
+{
+    .lastMessage <<- NULL
+    msg <- list(cmd="toLowerCase", callback="handleResult", payload=string)
+    my.send(wsCon, msg)
+
+    while(is.null(.lastMessage)){
+       Sys.sleep(0.1)
+       }
+
+    return(.lastMessage$payload)
+
+} # toLowerCase
+#--------------------------------------------------------------------------------
+toVectorSum <-  function(wsCon, vector=c(1,2,3)) {
+    .lastMessage <<- NULL
+    msg <- list(cmd="toVectorSum", callback="handleResult", payload=vector)
+    my.send(wsCon, msg)
+
+    while(is.null(.lastMessage)){
+        Sys.sleep(0.1)
+        }
+    return(.lastMessage$payload)
+    } #toVectorSum
+#--------------------------------------------------------------------------------
+handleResult <- function(message) {
+    printf("---handleResult")
+    .lastMessage <<- message$payload
+    NULL
+    }
+#--------------------------------------------------------------------------------
+
+INDEX.HTML
+
+function dispatchMessage(incomingMessage) {
+         console.log("--- dispatchMessage")
+	 var cmd = incomingMessage.cmd;
+         var payload = incomingMessage.payload;
+	 switch(cmd) {
+	    case "toUpperCase":
+	       upperCase(payload);
+      	       break;
+	    case "toLowerCase":
+               lowerCase(payload);
+	       break;
+	    case "toVectorSum":
+	       vectorSum(payload);
+	       break;
+	       }
+	 }
+
+      function upperCase(payload) {
+          outgoingText = payload.toUpperCase();
+	  returnMessage = JSON.stringify({cmd: payload.callback,
+	                                       callback: "",
+					       payload: outgoingText});
+          console.log(outgoingText);
+	  ws.send(returnMessage);
+	  }
+
+      function lowerCase(payload) {
+          outgoingText = payload.toLowerCase();
+	  returnMessage = JSON.stringify({cmd: payload.callback,
+	                                  callback: "",
+					  payload: outgoingText});
+          console.log(outgoingText);
+	  ws.send(returnMessage);
+	  }
+
+      function vectorSum(payload) {
+          outgoingText =addVector(payload);
+	  returnMessage = JSON.stringify({cmd: payload.callback,
+	                                  callback: "",
+					  payload: outgoingText});
+          console.log(outgoingText);
+	  ws.send(returnMessage);
+	  }
+
+      function addVector(vec) {
+          var total = 0;
+	  for(i=0; i<vec.length; i++) {
+	     total += vec[i];
+	     };
+          return(total);
+	  }
+
+End webSocketBug/app.R & index.html
+<------------------------------------------------>
 R Related Things:
 
 
