@@ -322,6 +322,9 @@ function dispatchMessage(incomingMessage) {
           return(mat);
           }
 
+Store the value of a matrix, so that it does not print into the console or the R session: mat2 <- function()
+To find out how much time is take the system to process a request, use: system.time(print(function()))
+
 End webSocketBug/app.R & index.html
 <------------------------------------------------>
 R Related Things:
