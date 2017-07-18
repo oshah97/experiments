@@ -1,0 +1,244 @@
+
+R version 3.4.0 (2017-04-21) -- "You Stupid Darkness"
+Copyright (C) 2017 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin15.6.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> > if(identical(getOption('pager'), file.path(R.home('bin'), 'pager'))) options(pager='cat') # rather take the ESS one 
+> options(STERM='iESS', str.dendrogram.last="'", editor='emacsclient', show.error.locations=TRUE)
+> 1 + 1
+[1] 2
+> x=c(2,7,5)
+> x
+[1] 2 7 5
+> getw
+Error: object 'getw' not found
+> getwd
+function () 
+.Internal(getwd())
+<bytecode: 0x7fe314b22040>
+<environment: namespace:base>
+> get wd
+Error: unexpected symbol in "get wd"
+> y=seq(from=4, length=3, by=3)
+> y
+[1]  4  7 10
+> x+y
+[1]  6 14 15
+> x
+[1] 2 7 5
+> x/y
+[1] 0.5 1.0 0.5
+> y/x
+[1] 2 1 2
+> c[2]
+Error in c[2] : object of type 'builtin' is not subsettable
+> x[2]
+[1] 7
+> y[2]
+[1] 7
+> x[-2]
+[1] 2 5
+> x[-3]
+[1] 2 7
+> x[-c(1,2)]
+[1] 5
+> z-matrix(seq(1,12),4,3)
+Error: object 'z' not found
+> z=matrix(seq(1,12),4,3)
+> z
+     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10
+[3,]    3    7   11
+[4,]    4    8   12
+> z[3:4, 2:3]
+     [,1] [,2]
+[1,]    7   11
+[2,]    8   12
+> z[,2:3]
+     [,1] [,2]
+[1,]    5    9
+[2,]    6   10
+[3,]    7   11
+[4,]    8   12
++ fasdf
++ end
+Error: unexpected symbol in:
+"fasdf
+end"
+> z[,1]
+[1] 1 2 3 4
+> z[,1,drop=FALSE]
+     [,1]
+[1,]    1
+[2,]    2
+[3,]    3
+[4,]    4
+> dim(z)
+[1] 4 3
+> z[,2:3]
+     [,1] [,2]
+[1,]    5    9
+[2,]    6   10
+[3,]    7   11
+[4,]    8   12
+> z
+     [,1] [,2] [,3]
+[1,]    1    5    9
+[2,]    2    6   10
+[3,]    3    7   11
+[4,]    4    8   12
+> z[,1]
+[1] 1 2 3 4
+> z[,1,drop=FALSE]
+     [,1]
+[1,]    1
+[2,]    2
+[3,]    3
+[4,]    4
+> dim(z)
+[1] 4 3
+> ls()
+[1] "x" "y" "z"
+> rm(y)
+> ls()
+[1] "x" "z"
+>  x=runif(50)
+> x
+ [1] 0.20635916 0.24836478 0.59580753 0.92643026 0.18103302 0.52068376
+ [7] 0.75375415 0.37416447 0.08704113 0.98059614 0.41407749 0.95900906
+[13] 0.99694911 0.69360068 0.82766225 0.43481539 0.57530528 0.64154452
+[19] 0.99264892 0.47207556 0.49663340 0.10392590 0.55128499 0.69114991
+[25] 0.67326433 0.05538172 0.03368519 0.15768062 0.16000183 0.14066364
+[31] 0.11929925 0.04165295 0.65797984 0.38556974 0.72100203 0.78717334
+[37] 0.44786608 0.29523971 0.28647795 0.90743840 0.49425268 0.15157330
+[43] 0.52210773 0.90335365 0.30340878 0.15711341 0.76662952 0.58268276
+[49] 0.51493136 0.09956711
+> y=rnorm(50)
+> plot(x,y)
+> plot(x, y, xlab="Random Uniform", ylab="Random Normal", pch="*", col="blue")
+> hist(y)
+> par(mfrow=c(1,1))
+> search()
+ [1] ".GlobalEnv"        "ESSR"              "package:stats"    
+ [4] "package:graphics"  "package:grDevices" "package:utils"    
+ [7] "package:datasets"  "package:methods"   "Autoloads"        
+[10] "package:base"     
+> swirl
+Error: object 'swirl' not found
+> set.seed(101)
+> x=matrix(rnorm(100*2),100,2)
+> xmean=martix(rnorm(8, $d=4),4,2)
+Error: unexpected '$' in "xmean=martix(rnorm(8, $"
+> xmean=martix(rnorm(8,$d=4),4,2)
+Error: unexpected '$' in "xmean=martix(rnorm(8,$"
+> xmean=matrix(rnorm(8,$d=4),4,2)
+Error: unexpected '$' in "xmean=matrix(rnorm(8,$"
+> xmean=matrix(rnorm(8,sd=4),4,2)
+> which-sample(1:4,100,replace=TRUE)
+Error in which - sample(1:4, 100, replace = TRUE) : 
+  non-numeric argument to binary operator
+> which=sample(1:4,100,replace=TRUE)
+> x=x+xmean[which,]
+> plot(x, col=which,pch=19)
+> km.out=kmeans(x,4,nstart=15)
+> km.out
+K-means clustering with 4 clusters of sizes 29, 27, 21, 23
+
+Cluster means:
+        [,1]       [,2]
+1 -5.6802710  3.5031762
+2 -0.8304071  4.8937733
+3 -2.9125028  0.9987903
+4  1.6947333 -0.3832593
+
+Clustering vector:
+  [1] 2 2 1 4 1 3 2 2 3 4 1 1 3 4 3 4 4 1 1 2 4 1 2 2 3 4 1 1 2 3 4 3 2 1 4 3 4
+ [38] 2 2 4 1 4 3 3 2 3 2 3 4 2 3 2 3 4 2 4 1 2 3 4 2 1 1 1 1 1 3 2 1 3 4 4 4 3
+ [75] 4 1 1 1 3 2 1 3 1 2 2 4 1 1 3 2 4 1 1 2 2 1 4 2 2 1
+
+Within cluster sum of squares by cluster:
+[1] 41.65555 59.63189 29.67328 47.84516
+ (between_SS / total_SS =  86.9 %)
+
+Available components:
+
+[1] "cluster"      "centers"      "totss"        "withinss"     "tot.withinss"
+[6] "betweenss"    "size"         "iter"         "ifault"      
+> plot(x, col=km.out$cluster,cex=2,pch=1,lwd=2)
+> points(x,col=which,pch=19)
+> points(x,col=c(4,3,2,1)[which],pch=19)
+> hc.complete=hclust(dist(x), method="complete")
+> plot(hc.complete)
+> hc.single=hclust(dist(x),method="single")
+> plot(hc.single)
+> hc.average(hclust(dist(x),method="average")
++ plot(hc.average)
+Error: unexpected symbol in:
+"hc.average(hclust(dist(x),method="average")
+plot"
+> hc.average=(hclust(dist(x),method="average")
++ 
++ adfsf
+Error: unexpected symbol in:
+"
+adfsf"
+> hc.average=(hclust(dist(x),method="average")
+
+adfsf
+hc.average=(hclust(dist(x),method="average")
++ 
++ adfsf
+Error: unexpected symbol in:
+"
+adfsf"
+> plot(hc.average)
+Error in plot(hc.average) : object 'hc.average' not found
+> hc.average=hclust(dist(x),method="average")
+> plot(hc.average)
+> hc.cut-cutree(hc.complete,4)
+Error: object 'hc.cut' not found
+> hc.cut=cutree(hc.complete,4)
+> table(hc, cut, which)
+Error in table(hc, cut, which) : object 'hc' not found
+> table(hc.cut, which)
+      which
+hc.cut  1  2  3  4
+     1 27  2  0  1
+     2  0 27  0  0
+     3  0  0 23  0
+     4  0  0  0 20
+> plot(hc.complete)
+> table(hc.cut,km.out$cluster)
+      
+hc.cut  1  2  3  4
+     1  2 27  1  0
+     2 27  0  0  0
+     3  0  0  0 23
+     4  0  0 20  0
+> plot(hc.complete,labels=which)
+> r-studop
+Error: object 'r' not found
+> studio
+Error: object 'studio' not found
+> getwd
+function () 
+.Internal(getwd())
+<bytecode: 0x7fe314b22040>
+<environment: namespace:base>
+> 
+> 

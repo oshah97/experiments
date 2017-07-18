@@ -1,0 +1,52 @@
+<html>
+<head>
+  <script>http://code.jquery.com/jquery-1.7.2.min.js</script>
+  <style>
+  
+    #help{
+       background-color:red;
+       width:300px;
+       height:300px;
+       display:none;
+       position:fixed;
+       top:50%;
+       left:50%;
+       margin:-150px 0 0 -150px;
+       }
+   <script>
+      $(document).ready(function() {
+         $("#help_button").click(function() {
+            $("#help").slideToggle(1000, function() {
+               if($("#help_button").val() == "close")
+               {
+               $("#help_button").val("show table");
+               }
+               else
+               {
+               $("#help_button").val("close");
+               }
+            });
+         });
+      });
+   </script>
+
+       
+  </style>
+
+</head>
+
+<body>
+
+  <div id="help">
+    table populated with information 
+    <table>
+        <tr>
+            <td>hello</td>
+            <td>hello</td>
+        </tr>
+    </table>
+  </div>
+<input id="help_button" type="button" value="Show Popup"/>
+
+</body>
+</html>

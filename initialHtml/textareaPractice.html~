@@ -1,0 +1,15 @@
+<hmtl>
+<head>
+  <title>Textarea Practice</title>
+
+</head>
+
+<body>
+  <h1>Textarea funciton practice</h1>
+  <div class="withText">
+    <textarea id="test" readonly="true";>
+       This is the text area that I will practice on. I want to add a paragraph space in between every sentence. This will also be an attempt to create a nice-looking text area.
+    </textarea>
+    
+</body>
+</html>

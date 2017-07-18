@@ -1,0 +1,260 @@
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>phoneTreeDemo </title>
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<style>
+#phoneTreePanel {
+  margin: auto;
+  width: 400px;
+  height: 100%;
+  border: 1px solid #444;
+  border-radius:5px;
+  display: block;
+  background-color: beige;
+  }
+
+#phoneTreePanel option{
+  font-size: 200%;
+  }
+
+#phoneTreeControlsDiv{
+  margin-top: 10px;
+  margin-left: 20px;
+  }
+
+#phoneTreeTableDiv{
+  margin-top: 10px;
+  margin-left: 30px;
+  }
+
+table, th, td {
+    border: 1px solid black;
+}
+
+</style>
+<script>
+//----------------------------------------------------------------------------------------------------
+$(document).ready(function() {
+}); // document ready
+//----------------------------------------------------------------------------------------------------
+</script>
+</head>
+<body>
+  <div id="phoneTreePanel">
+    <div id="phoneTreeControlsDiv">
+    <center><h2>Phone Tree</h2></center>
+    <table>
+      <!--tr><td>Delay</td>
+        <td><select>
+            <option value="1" style="font-size: 34px;">1 second</option>
+            <option value="2">2 seconds</option>
+            <option value="5">5 seconds</option>
+            <option value="10">10 seconds</option>
+            <option value="30">30 seconds</option>
+           </select></td></tr -->
+       <tr><td>&nbsp;</td><td><button id="phoneTreeStepButton">Step</button></td>
+           <td>&nbsp;</td><td><button id="phoneTreeClearButton">Clear</button></td></tr>
+
+     </table>
+
+    </div> <!-- phoneTreeControlsDiv -->
+
+    <div id="phoneTreeTableDiv">
+    <table>
+      <tr><th></th><th>in &nbsp; out</th><th></th><th></th><th>in &nbsp; out</th><th></th><th></th><th>in &nbsp; out</th></tr>
+      <tr>
+        <td>1A</td> <td><input id="phoneTreeReadout_outgoing_1A" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_1A" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>2A</td> <td><input id="phoneTreeReadout_outgoing_2A" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_2A" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>3A</td> <td><input id="phoneTreeReadout_outgoing_3A" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_3A" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>1B</td> <td><input id="phoneTreeReadout_outgoing_1B" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_1B" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>2B</td> <td><input id="phoneTreeReadout_outgoing_2B" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_2B" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>3B</td> <td><input id="phoneTreeReadout_outgoing_3B" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_3B" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>1C</td> <td><input id="phoneTreeReadout_outgoing_1C" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_1C" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>2C</td> <td><input id="phoneTreeReadout_outgoing_2C" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_2C" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>3C</td> <td><input id="phoneTreeReadout_outgoing_3C" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_3C" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>1D</td> <td><input id="phoneTreeReadout_outgoing_1D" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_1D" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>2D</td> <td><input id="phoneTreeReadout_outgoing_2D" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_2D" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>3D</td> <td><input id="phoneTreeReadout_outgoing_3D" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_3D" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>1E</td> <td><input id="phoneTreeReadout_outgoing_1E" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_1E" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>2E</td> <td><input id="phoneTreeReadout_outgoing_2E" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_2E" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>3E</td> <td><input id="phoneTreeReadout_outgoing_3E" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_3E" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+
+      <tr><td>&nbsp;</td></tr>
+
+
+      <tr>
+        <td>4A</td> <td><input id="phoneTreeReadout_outgoing_4A" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_4A" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>5A</td> <td><input id="phoneTreeReadout_outgoing_5A" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_5A" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>6A</td> <td><input id="phoneTreeReadout_outgoing_6A" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_6A" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>4B</td> <td><input id="phoneTreeReadout_outgoing_4B" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_4B" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>5B</td> <td><input id="phoneTreeReadout_outgoing_5B" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_5B" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>6B</td> <td><input id="phoneTreeReadout_outgoing_6B" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_6B" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>4C</td> <td><input id="phoneTreeReadout_outgoing_4C" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_4C" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>5C</td> <td><input id="phoneTreeReadout_outgoing_5C" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_5C" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>6C</td> <td><input id="phoneTreeReadout_outgoing_6C" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_6C" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+
+      <tr>
+        <td>4D</td> <td><input id="phoneTreeReadout_outgoing_4D" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_4D" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>5D</td> <td><input id="phoneTreeReadout_outgoing_5D" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_5D" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>6D</td> <td><input id="phoneTreeReadout_outgoing_6D" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_6D" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>4E</td> <td><input id="phoneTreeReadout_outgoing_4E" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_4E" type="text" value="0" size="2" readonly></input>
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>5E</td> <td><input id="phoneTreeReadout_outgoing_5E" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_5E" type="text" value="0" size="2" readonly></input>
+
+        </td>
+        <td>&nbsp; &nbsp;</td>
+        <td>6E</td> <td><input id="phoneTreeReadout_outgoing_6E" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_6E" type="text" value="0" size="2" readonly></input>
+
+        </td>
+      </tr>
+
+
+      <tr><td>&nbsp;</td></tr>
+
+
+
+      <tr><td>7A</td> <td><input id="phoneTreeReadout_outgoing_7A" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_7A" type="text" value="0" size="2" readonly></input></tr>
+      <tr><td>7B</td> <td><input id="phoneTreeReadout_outgoing_7B" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_7B" type="text" value="0" size="2" readonly></input></tr>
+      <tr><td>7C</td> <td><input id="phoneTreeReadout_outgoing_7C" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_7C" type="text" value="0" size="2" readonly></input></tr>
+      <tr><td>7D</td> <td><input id="phoneTreeReadout_outgoing_7D" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_7D" type="text" value="0" size="2" readonly></input></tr>
+      <tr><td>7E</td> <td><input id="phoneTreeReadout_outgoing_7E" type="text" value="0" size="2" readonly></input>
+                        <input id="phoneTreeReadout_incoming_7E" type="text" value="0" size="2" readonly></input></tr>
+
+      <tr><td>&nbsp;</td></tr>
+
+      </tr>
+    </table>
+   </div>  <!-- phoneTreeTableDiv -->
+  </div>
+</body>
+</html>
+
+

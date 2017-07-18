@@ -1,0 +1,13 @@
+Notes:
+
+jQuery: <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+adding a clickable button example:
+    <script>
+       $(document).ready(function(){
+          $("#progress").click(function(){
+          $("textarea").toggle();
+          });
+       });
+    </script>
+

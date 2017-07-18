@@ -1,0 +1,61 @@
+
+<html>
+ <head>
+ 
+ <title>Open Help Page</title>
+ 
+ <script>
+
+function delegate(){
+  setTimeout(openHelp, 1);
+   }
+
+ function openHelp() {
+   window.open("http://localhost:8099/sampleHelpPage.html", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
+}
+
+ </script>
+ 
+ <style>
+ 
+ input {
+   font-size: 50px;
+   margin: 1%;
+   }
+ 
+ .container {
+   border: 1px solid black;
+   margin: 1%;
+   }
+ 
+ h2, h3, .explain {
+   margin: 1%;
+   }
+ 
+ </style>
+ 
+ </head>
+ 
+ <body>
+ 
+ <div class="container">
+ 
+ <h2>This is a page that I am using to practice opening up html files using the open.window function</h2>
+ 
+ <h3>Click the "Help" button below to open a window to page of raw html text:</h3>
+ 
+<input type="button" value="Help" onclick="delegate();" />
+ 
+ <h3>Things that are going on</h3>
+ 
+ <ol type="i">
+ <li class="explain">This help button was supposed to link to an sample help html file, but the link to that html (which is on my GitHub as well) brings the user to the raw html</li>
+ 
+ <li class="explain">Without using a direct link to a file on this specific isb computer, I haven't figured out how to show an html file</li>
+ 
+ <li class="explain">But it does work when linked to file on this desktop computer!</li>
+ 
+ </div>
+ 
+ </body>
+ </html> 
