@@ -14,16 +14,16 @@ pre { margin: 0 }
      var msgDiv = document.getElementById("outputDiv");
      var incomingMessage = JSON.parse(msg.data);
      console.log("incoming message: "); 
-     console.log(incomingMessage);
+     //console.log(incomingMessage);
      var cmd = incomingMessage.cmd;
      var payload = incomingMessage.payload;
      console.log("msg.data");
-     console.log(msg.data);
+     //console.log(msg.data);
      var outgoingText;
      var callback = incomingMessage.callback;
      var status = "success";  // be optimistic
      dispatchMessage(incomingMessage);
-     msgDiv.innerHTML = "<b>received:</b> " + payload + "<br><b>returning: </b> " + outgoingText;
+     //msgDiv.innerHTML = "<b>received:</b> " + payload + "<br><b>returning: </b> " + outgoingText;
 
      }
 
@@ -79,7 +79,7 @@ pre { margin: 0 }
 	  returnMessage = JSON.stringify( {cmd: payload.callback,
 	                                        callback: "",
 						payload: outgoingMatrix});
-          console.log(outgoingMatrix);
+          console.log("outgoingMatrix");
 	  ws.send(returnMessage);
 	  }
 
