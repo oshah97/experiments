@@ -373,6 +373,7 @@ hierarchical cluster plot of above data:
 - hc.average=hclust(dist(x),method="average")
 - plot(hc.average)
 
+match("string you're looking for", vector you're searching in)
 
 End R Stuff
 <---------------------------------------------------->
