@@ -375,6 +375,8 @@ hierarchical cluster plot of above data:
 
 match("string you're looking for", vector you're searching in)
 
+paste() creates a concatenated string, paste(data, collapse='') pastes all the elements of "data" orgsub(", ","",toString(c(1:10)))
+
 End R Stuff
 <---------------------------------------------------->
 
