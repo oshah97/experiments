@@ -379,3 +379,16 @@ paste() creates a concatenated string, paste(data, collapse='') pastes all the e
 
 End R Stuff
 <---------------------------------------------------->
+Toture Test Data for Websocket (Mac OS)
+
+Matrix size and speed (avg.) of return:
+200 x 200 -> 0.115 seconds
+300 x 300 -> 0.119s
+400 x 400 -> 0.220s
+500 x 500 -> 76.7s (1.25 minutes)
+500 x 750 -> 193.1s (3.21 minutes)
+500 x 1000 -> 357.5s (6 minutes)
+
+Notes:
+If websocket asked to return a matrix that was too large (400 x 400) before any other matrices, the it took over 15 minutes and I had to kill the websocket. When the matrices passed through began at smaller sizes (100 x 100, 200 x 200...) and gradually increased in size, the websocket was able to handle them better. It needed a few warm up matrices.
+<-------------------------------------------------->
