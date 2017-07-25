@@ -45,7 +45,7 @@ my.send <- function(wsCon, msg)
 init <- function()
 {
    wsCon <- configureWebSocketServer()
-   port <- 8654
+   port <- 8665
    browseURL(sprintf("http://localhost:%d", port))
    wsCon$id <- startDaemonizedServer("0.0.0.0", port, wsCon)
    return(wsCon)
@@ -118,6 +118,46 @@ toMatrixPrint <- function(wsCon, mat=matrix(
           }     
     return(.lastMessage$payload)
     }#toMatrixPrint
+#--------------------------------------------------------------------------------
+tortureTest <- function() {
+
+    printf("=== test sends differnt sized matrices through a websocket and prints time is takes to receive the return message")
+    printf("=== tests eight matrices; final matrix is 500 x 1000; results print below matrix size text")
+    printf("=== test estimated to take between 10 - 15 minutes")
+    
+    mat <<- matrix(1:100, nrow=10)
+    print("=== 10x10 matrix")
+    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+
+    mat <<- matrix(1:10000, nrow=100)
+    print("=== 100x100 matrix")
+    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+
+    mat <<- matrix(1:40000, nrow=200)
+    print("=== 200x200 matrix")
+    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    
+    mat <<- matrix(1:90000, nrow=300)
+    print("=== 300x300 matrix")
+    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+
+    mat <<- matrix(1:160000, nrow=400)
+    print("=== 400x400 matrix")
+    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    
+    mat <<- matrix(1:250000, nrow=500)
+    print("=== 500x500 matrix")
+    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+
+    mat <<- matrix(1:375000, nrow=750)
+    print("=== 500x750 matrix")
+    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+
+    mat <<- matrix(1:500000, nrow=1000)
+    print("=== 500x1000 matrix")
+    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+   
+    }#TortureTest
 #--------------------------------------------------------------------------------
 handleResult <- function(message) {
     printf("---handleResult")

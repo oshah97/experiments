@@ -387,6 +387,7 @@ test_dataFrame <- function() {
     checkTrue(is.data.frame(row_nodes))
 }  
 
+All return TRUE!
 
 End R Stuff
 <---------------------------------------------------->
