@@ -50,7 +50,6 @@ pre { margin: 0 }
       function upperCase(payload) {
           outgoingText = payload.toUpperCase();
 	  returnMessage = JSON.stringify({cmd: payload.callback,
-	                                       callback: "",
 					       payload: outgoingText});
           console.log(outgoingText);
 	  ws.send(returnMessage);
@@ -59,8 +58,7 @@ pre { margin: 0 }
       function lowerCase(payload) {
           outgoingText = payload.toLowerCase();
 	  returnMessage = JSON.stringify({cmd: payload.callback,
-	                                  callback: "",
-					  payload: outgoingText});
+		                               payload: outgoingText});
           console.log(outgoingText);
 	  ws.send(returnMessage);
 	  }
@@ -68,8 +66,7 @@ pre { margin: 0 }
       function vectorSum(payload) {
           outgoingNumber = addVector(payload);
 	  returnMessage = JSON.stringify({cmd: payload.callback,
-	                                  callback: "",
-					  payload: outgoingNumber});
+     					       payload: outgoingNumber});
           console.log(outgoingNumber);
 	  ws.send(returnMessage);
 	  }
@@ -77,8 +74,7 @@ pre { margin: 0 }
       function matrixPrint(payload) {
           outgoingMatrix = doubleValues(payload);
 	  returnMessage = JSON.stringify( {cmd: payload.callback,
-	                                        callback: "",
-						payload: outgoingMatrix});
+	                                       	payload: outgoingMatrix});
           console.log("outgoingMatrix");
 	  ws.send(returnMessage);
 	  }
