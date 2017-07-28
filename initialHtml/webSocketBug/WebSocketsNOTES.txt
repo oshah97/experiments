@@ -1,0 +1,36 @@
+WebSocket on “porch” Windows Computer
+i.	Set-Up
+a.	GNU Emacs 25.2.1 (with ESS)
+b.	Oshah97 experiments/ repository cloned into /github
+
+c.	Libraries downloaded from Bioconductor
+i.	httpuv
+ii.	jsonlite
+iii.	RUnit
+
+ii.	Opening WebSocket Connection
+a.	Open R in /experiments/initialHtml/webSocketBug
+b.	> Source(“app.R”)
+c.	> wsCon <- init()
+d.	If opening new connection, change port
+
+iii.	Functions available
+a.	toUpperCase(wsCon, string)
+b.	toLowerCase(wsCon, string)
+c.	toVectorSum(wsCon, vector)
+d.	toMatrixPrint(wsCon, mat=matrix()) -- 
+e.	tortureTestSmall()
+i.	one small 100 x 100 matrix
+f.	tortureTest()
+i.	eight large matrices beginning at 100 x 100 and ending at 500 x 1000
+g.	test_packageVersion()
+i.	RUnit – “0.4.31”, jsonlite – “1.5”, httpuv – “1.3.5” 
+
+iv.	Findings
+a.	WebSocket connection and R session survived the torture test
+b.	Connection broke many times before, but finally worked after WebSocket was “warmed-up”
+c.	If the tortureTest() function was called immediately after the connection was opened, the connection and R session would fail consistently. The connection stayed open longer when smaller functions were passed through the WebSocket first.
+d.	Smaller functions that ran before tortureTest() were test_packageVersion(), toUpperCase(wsCon, “hello”), tortureTestSmall()… and then tortureTest()
+e.	The whole test was finished in under 3 seconds
+f.	The time it took to for the system send and receive the matrices incrementally increased at the size of the matrix being passed through increased
+g.	Has never been this fast on the Mac or on my personal laptop
