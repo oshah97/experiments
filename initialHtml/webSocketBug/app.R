@@ -46,7 +46,7 @@ my.send <- function(wsCon, msg)
 init <- function()
 {
    wsCon <- configureWebSocketServer()
-   port <- 8689
+   port <- 8690
    browseURL(sprintf("http://localhost:%d", port))
    wsCon$id <- startDaemonizedServer("0.0.0.0", port, wsCon)
    return(wsCon)
@@ -130,46 +130,46 @@ tortureTest <- function() {
     print("=== tests eight matrices; final matrix is 500 x 1000; results print below matrix size text")
     print("=== test estimated to take between 10 - 15 minutes")
 
-    mat <<- matrix(1:100, nrow=10)
+    mat <- matrix(1:100, nrow=10)
     print("=== 10x10 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
     
-    mat <<- matrix(1:10000, nrow=100)
+    mat <- matrix(1:10000, nrow=100)
     print("=== 100x100 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
     
-    mat <<- matrix(1:40000, nrow=200)
+    mat <- matrix(1:40000, nrow=200)
     print("=== 200x200 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
 
 
-    mat <<- matrix(1:90000, nrow=300)
+    mat <- matrix(1:90000, nrow=300)
     print("=== 300x300 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
 
-    mat <<- matrix(1:160000, nrow=400)
+    mat <- matrix(1:160000, nrow=400)
     print("=== 400x400 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
 
-    mat <<- matrix(1:250000, nrow=500)
+    mat <- matrix(1:250000, nrow=500)
     print("=== 500x500 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
 
-    mat <<- matrix(1:375000, nrow=750)
+    mat <- matrix(1:375000, nrow=750)
     print("=== 500x750 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
 
-    mat <<- matrix(1:500000, nrow=1000)
+    mat <- matrix(1:500000, nrow=1000)
     print("=== 500x1000 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
 
     }#TortureTest
 #--------------------------------------------------------------------------------
 tortureTestSmall <- function() {
     
     print("=== test 100 x 100 matrix")
-    mat <<- matrix(1:10000, nrow=100)
-    print(system.time(mat2 <<- toMatrixPrint(wsCon, mat)))
+    mat <- matrix(1:10000, nrow=100)
+    print(system.time(mat2 <- toMatrixPrint(wsCon, mat)))
     print(paste(sep=" ",
                 'Number of bytes:',
                 nchar(toJSON(.lastMessage))))
@@ -183,9 +183,9 @@ tortureTestSmall <- function() {
 #--------------------------------------------------------------------------------
 tortureTestMedium <- function() {
     
-    mat <<- matrix(1:100, nrow=10)
+    mat <- matrix(1:100, nrow=10)
     print("=== 10x10 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
     print(paste(sep=" ",
                 'Number of bytes:',
                 nchar(toJSON(.lastMessage))))
@@ -195,9 +195,9 @@ tortureTestMedium <- function() {
                 'Number of columns:',
                 ncol(mat2)))
     
-    mat <<- matrix(1:10000, nrow=100)
+    mat <- matrix(1:10000, nrow=100)
     print("=== 100x100 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
     print(paste(sep=" ",
                 'Number of bytes:',
                 nchar(toJSON(.lastMessage))))
@@ -207,9 +207,9 @@ tortureTestMedium <- function() {
                 'Number of columns:',
                 ncol(mat2)))
     
-    mat <<- matrix(1:40000, nrow=200)
+    mat <- matrix(1:40000, nrow=200)
     print("=== 200x200 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
     print(paste(sep=" ",
                 'Number of bytes:',
                 nchar(toJSON(.lastMessage))))
@@ -220,9 +220,9 @@ tortureTestMedium <- function() {
                 ncol(mat2)))
 
 
-    mat <<- matrix(1:90000, nrow=300)
+    mat <- matrix(1:90000, nrow=300)
     print("=== 300x300 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
     print(paste(sep=" ",
                 'Number of bytes:',
                 nchar(toJSON(.lastMessage))))
@@ -232,9 +232,9 @@ tortureTestMedium <- function() {
                 'Number of columns:',
                 ncol(mat2)))
 
-    mat <<- matrix(1:160000, nrow=400)
+    mat <- matrix(1:160000, nrow=400)
     print("=== 400x400 matrix")
-    print(system.time((mat2 <<- toMatrixPrint(wsCon, mat))))
+    print(system.time((mat2 <- toMatrixPrint(wsCon, mat))))
     print(paste(sep=" ",
                 'Number of bytes:',
                 nchar(toJSON(.lastMessage))))
@@ -249,7 +249,7 @@ tortureTestMedium <- function() {
 handleResult <- function(message) {
     
     printf("---handleResult")
-    .lastMessage <<- message$payload
+    .lastMessage <- message$payload
     NULL
 
     }#handleResult
