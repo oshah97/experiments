@@ -25,7 +25,10 @@ The key's randomart image is:
 |      .++++.. +OB|
 +----[SHA256]-----+
 
+To copy public key for Github;
+cat ~/.ssh/id_rsa.pub >/dev/clipboard
 
+End SSH Keys
 <----------------------------------------------->
 ~/.bashrce config. (change depending on computer in use)
 ~/.bash_profile (contains source ~/.bashrc)
