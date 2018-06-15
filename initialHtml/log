@@ -1,6 +1,32 @@
 Notes:
 
 <----------------------------------------------->
+SSH Authentication Key Process:
+
+using GIT BASH
+
+ssh-keygen -t rsa -b 4096 -C "oshah97@outlook.com"
+"ENTER PASSPHRASE":
+
+Stuff that happened:
+
+The key fingerprint is:
+SHA256:1/NnXcy53f064c94Enyf00LQ8vevKOzaFPALrasX+h8 oshah97@outlook.com
+The key's randomart image is:
++---[RSA 4096]----+
+|                 |
+|                 |
+|        .    .   |
+|         + .o .o.|
+|        S = o= .+|
+|        .+ o o* X|
+|       ..oE  o.*%|
+|      . .+o. .=B*|
+|      .++++.. +OB|
++----[SHA256]-----+
+
+
+<----------------------------------------------->
 ~/.bashrce config. (change depending on computer in use)
 ~/.bash_profile (contains source ~/.bashrc)
 M-x eval-buffer to run current buffer
