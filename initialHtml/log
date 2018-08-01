@@ -108,6 +108,18 @@ jQuery UI; .draggable() & .resizable():
       $("#myPopup").resizable();
       });
 </script>
+<-------------------------------------------------->
+npm and webpack
+
+check:
+node -v
+
+install:
+https://www.npmjs.com/get-npm
+
+npm install --save-dev webpack
+
+To make from a makefile, change path to webpack in makefile
 
 To Download webpack:
 - type -a npm
@@ -118,7 +130,7 @@ To open WebPack:
 - Find the directory it's in (in this case: /usr/local/bin/
 - Create a PATH to that file
 - make makefile
-
+<-------------------------------------------------->
 Original PATH isb desktop:
 /usr/bin:/bin:/usr/sbin:/sbin:/Applications/Emacs.app/Contents/MacOS/bin-x86_64-10_9:/Applications/Emacs.app/Contents/MacOS/libexec-x86_64-10_9
 
